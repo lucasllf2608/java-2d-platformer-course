@@ -4,6 +4,8 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ import Entidades.Entity;
 import Entidades.Player;
 import graficos.Spritesheet;
 
-public class Game extends Canvas implements Runnable{
+public class Game extends Canvas implements Runnable, KeyListener{
 
 	/**
 	 * 
@@ -33,8 +35,10 @@ public class Game extends Canvas implements Runnable{
 	private BufferedImage fundo;
 	public List<Entity> entities = new ArrayList<>();
 	public Spritesheet spritesheet;
+	public Player player;
 
 	public Game(){
+		addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
 		initFrame();
 		fundo = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -48,7 +52,7 @@ public class Game extends Canvas implements Runnable{
 
     entities = new ArrayList<>();
 	spritesheet = new Spritesheet("/res/spriteSheet-course.png");
-	Player player = new Player(0, 0, 16, 16, spritesheet.getSprite(32, 0, 16, 16));
+	player = new Player(0, 0, 16, 16, spritesheet.getSprite(32, 0, 16, 16));
 	entities.add(player);
 
 	}
@@ -151,5 +155,38 @@ public class Game extends Canvas implements Runnable{
 		}
 		stop();
 		}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_W){
+			player.up= true;
+		} else if(e.getKeyCode() == KeyEvent.VK_A){
+			player.left= true;
+		} else if(e.getKeyCode() == KeyEvent.VK_S){
+			player.down= true;
+		} else if(e.getKeyCode() == KeyEvent.VK_D){
+			player.right= true;
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+			if(e.getKeyCode() == KeyEvent.VK_W){
+			player.up= false;
+		} else if(e.getKeyCode() == KeyEvent.VK_A){
+			player.left= false;
+		} else if(e.getKeyCode() == KeyEvent.VK_S){
+			player.down= false;
+		} else if(e.getKeyCode() == KeyEvent.VK_D){
+			player.right= false;
+		}
+		
+	}
 
 }

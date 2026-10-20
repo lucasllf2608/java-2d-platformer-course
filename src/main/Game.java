@@ -1,4 +1,4 @@
-package graficos;
+package main;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -6,7 +6,14 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JFrame;
+
+import Entidades.Entity;
+import Entidades.Player;
+import graficos.Spritesheet;
 
 public class Game extends Canvas implements Runnable{
 
@@ -24,6 +31,8 @@ public class Game extends Canvas implements Runnable{
 	private static int SCALE = 3;
 
 	private BufferedImage fundo;
+	public List<Entity> entities = new ArrayList<>();
+	public Spritesheet spritesheet;
 
 	public Game(){
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
@@ -36,6 +45,12 @@ public class Game extends Canvas implements Runnable{
 		// } catch (IOException e) {
 		// 	e.printStackTrace();
 		// }
+
+    entities = new ArrayList<>();
+	spritesheet = new Spritesheet("/res/spriteSheet-course.png");
+	Player player = new Player(0, 0, 16, 16, spritesheet.getSprite(32, 0, 16, 16));
+	entities.add(player);
+
 	}
 
 	public void initFrame(){
@@ -61,10 +76,20 @@ public class Game extends Canvas implements Runnable{
 	}
 
 	public synchronized void stop() {
-
+		isRunning = false;
+		try {
+			gameThread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.exit(0);
 	}
 
 	public void tick() {
+		for(int i = 0; i < entities.size(); i++) {
+			Entity entity = entities.get(i);
+			entity.tick();
+		}
 	}
 
 	public void render() {
@@ -76,7 +101,13 @@ public class Game extends Canvas implements Runnable{
 		Graphics g = fundo.getGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
+
+        for(int i = 0; i < entities.size(); i++) {
+			Entity entity = entities.get(i);
+			entity.render(g);
+		}
 		g.dispose();
+		
 		g = buffer.getDrawGraphics();
 		g.drawImage(fundo, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
 		g.dispose();

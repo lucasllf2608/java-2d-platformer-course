@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 
 import Entidades.Entity;
 import Entidades.Player;
+import Mundo.Mundo;
 import graficos.Spritesheet;
 
 public class Game extends Canvas implements Runnable, KeyListener{
@@ -28,13 +29,14 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	private boolean isRunning = true;
 
 	
-	private static int WIDTH = 160;
-	private static int HEIGHT = 160;
-	private static int SCALE = 3;
+	private static int WIDTH = 640;
+	private static int HEIGHT = 400;
+	private static int SCALE = 2;
 
 	private BufferedImage fundo;
 	public List<Entity> entities = new ArrayList<>();
 	public static Spritesheet spritesheet;
+	public static Mundo mundo;
 	public Player player;
 
 	public Game(){
@@ -52,7 +54,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 
     entities = new ArrayList<>();
 	spritesheet = new Spritesheet("/res/spriteSheet-course.png");
-	player = new Player(0, 0, 16, 16, spritesheet.getSprite(32, 0, 16, 16));
+	mundo = new Mundo("/res/level1.png");
+	player = new Player(mundo.playerSpawnX, mundo.playerSpawnY, 16, 16, spritesheet.getSprite(32, 0, 16, 16));
 	entities.add(player);
 
 	}
@@ -105,6 +108,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		Graphics g = fundo.getGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
+
+		mundo.render(g);
 
         for(int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);

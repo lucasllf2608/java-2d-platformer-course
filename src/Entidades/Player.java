@@ -3,6 +3,7 @@ package Entidades;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import Mundo.Camera;
 import main.Game;
 
 public class Player extends Entity{
@@ -67,23 +68,26 @@ public class Player extends Entity{
 					}
 				}
 			}
+
+			Camera.x = Camera.clamp(this.getX() - (Game.WIDTH / 2), 0, Game.mundo.WIDTH * 16 - Game.WIDTH);
+			Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT / 2), 0, Game.mundo.HEIGHT * 16 - Game.HEIGHT);
 	}
 
 	public void render(Graphics g) {
 		if(direcaoAtual==direita && movimentacao==1) {
-           g.drawImage(playerRight[index], this.getX(), this.getY(), null);
+           g.drawImage(playerRight[index], this.getX()-Camera.x, this.getY()-Camera.y, null);
 		}
 
 		if(direcaoAtual==direita && movimentacao==0) {
-           g.drawImage(playerRight[0], this.getX(), this.getY(), null);
+           g.drawImage(playerRight[0],this.getX()-Camera.x, this.getY()-Camera.y, null);
 		}
 
 		if(direcaoAtual==esquerda && movimentacao==1) {
-			g.drawImage(playerLeft[index], this.getX(), this.getY(),null);
+			g.drawImage(playerLeft[index], this.getX()-Camera.x, this.getY()-Camera.y, null);
 		}
 		
 		if(direcaoAtual==esquerda && movimentacao==0) {
-			g.drawImage(playerLeft[0], this.getX(), this.getY(),null);
+			g.drawImage(playerLeft[0], this.getX()-Camera.x, this.getY()-Camera.y, null);
 		}
 	}
 

@@ -6,8 +6,8 @@ import java.awt.image.BufferedImage;
 import main.Game;
 
 public class Tile {
-    public static BufferedImage chao = Game.spritesheet.getSprite(16, 0, 16, 16);
-    public static BufferedImage chaoGRAMA = Game.spritesheet.getSprite(0, 0, 16, 16);
+    public static BufferedImage chao = Game.spritesheet.getSprite(0, 0, 16, 16);
+    public static BufferedImage chaoGRAMA = Game.spritesheet.getSprite(16, 0, 16, 16);
     public static BufferedImage grama = chaoGRAMA;
     public static BufferedImage empty = Game.spritesheet.getSprite(16, 32, 16, 16);
 

@@ -30,7 +30,6 @@ public class Player extends Entity{
 		playerRight[i] = Game.spritesheet.getSprite(32+(i*16), 0, 16, 16);
 	}
 
-
 	for(int i=0; i<4; i++) {
 		playerLeft[i] = Game.spritesheet.getSprite(80-(i*16), 16, 16, 16);
 	}
@@ -51,11 +50,15 @@ public class Player extends Entity{
 			direcaoAtual=esquerda;
 		}
 			
-		/*
-		if(up)
-			y-=speed;
-		if(down)
-			y+=speed;*/
+		if(up) {
+			y-=speed;	
+			movimentacao=1;
+		}	
+		if(down) {
+			y+=speed;
+			movimentacao=1;
+		}
+		
 
 
 			if(movimentacao==1){
@@ -89,6 +92,7 @@ public class Player extends Entity{
 		if(direcaoAtual==esquerda && movimentacao==0) {
 			g.drawImage(playerLeft[0], this.getX()-Camera.x, this.getY()-Camera.y, null);
 		}
+
 	}
 
 }

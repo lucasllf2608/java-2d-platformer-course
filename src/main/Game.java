@@ -37,7 +37,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public List<Entity> entities = new ArrayList<>();
 	public static Spritesheet spritesheet;
 	public static Mundo mundo;
-	public Player player;
+	public static Player player;
 
 	public Game(){
 		addKeyListener(this);
@@ -54,9 +54,11 @@ public class Game extends Canvas implements Runnable, KeyListener{
 
     entities = new ArrayList<>();
 	spritesheet = new Spritesheet("/res/spriteSheet-course.png");
-	mundo = new Mundo("/res/level1.png");
-	player = new Player(mundo.playerSpawnX, mundo.playerSpawnY, 16, 16, spritesheet.getSprite(32, 0, 16, 16));
+	//player = new Player(mundo.playerSpawnX, mundo.playerSpawnY, 16, 16, spritesheet.getSprite(32, 0, 16, 16));
+	player = new Player(0, 0, 16, 16, spritesheet.getSprite(32, 0, 16, 16));
 	entities.add(player);
+	mundo = new Mundo("/res/level1.png");
+	
 
 	}
 

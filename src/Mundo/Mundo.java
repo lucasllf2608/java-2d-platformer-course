@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import main.Game;
+
 public class Mundo {
 
     public int WIDTH, HEIGHT;
@@ -27,9 +29,8 @@ public class Mundo {
                 tiles[x + (y * WIDTH)] = new Empty(x*16, y*16, Tile.empty);
                     if(pixelAtual == 0xFFFBF236) {
                         //player
-                        playerSpawnX = x * 16;
-                        playerSpawnY = y * 16;
-                        tiles[x + (y * WIDTH)] = new Empty(x*16, y*16, Tile.empty);
+                        Game.player.setX(x*16);
+                        Game.player.setY(y*16);
                     }else if(pixelAtual == 0xFF663931) {
                         //chao
                         tiles[x + (y * WIDTH)] = new Chao(x*16, y*16, Tile.chao);
@@ -38,10 +39,10 @@ public class Mundo {
                         tiles[x + (y * WIDTH)] = new Chao(x*16, y*16, Tile.chaoGRAMA);
                     }else if(pixelAtual == 0xFFEB8931) {
                         //cenoura
-                        tiles[x + (y * WIDTH)] = new Empty(x*16, y*16, Tile.empty);
+                       // tiles[x + (y * WIDTH)] = new Empty(x*16, y*16, Tile.empty);
                     }else if(pixelAtual == 0xFFFFFFFF) {
                         //empty
-                        tiles[x + (y * WIDTH)] = new Empty(x*16, y*16, Tile.empty);
+                        //tiles[x + (y * WIDTH)] = new Empty(x*16, y*16, Tile.empty);
                     }
                 }
             }

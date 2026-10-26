@@ -3,6 +3,9 @@ package Entidades;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import Mundo.Camera;
+import main.Game;
+
 public class Entity {
     protected double x;
     protected double y;
@@ -10,6 +13,10 @@ public class Entity {
     protected int height;
     protected BufferedImage sprite;
 
+    public static BufferedImage chao = Game.spritesheet.getSprite(0, 0, 16, 16);
+    public static BufferedImage chaoGRAMA = Game.spritesheet.getSprite(16, 0, 16, 16);
+    public static BufferedImage grama = chaoGRAMA;
+    public static BufferedImage empty = Game.spritesheet.getSprite(16, 32, 16, 16);
 
     public Entity(int x, int y, int width, int height, BufferedImage sprite){
         this.x = x;
@@ -66,7 +73,7 @@ public class Entity {
     }
 
     public void render(Graphics g) {
-        g.drawImage(sprite, (int) x, (int) y, width, height, null);
+        g.drawImage(sprite, this.getX()-Camera.x, this.getY()-Camera.y, null);
     }
 
 }

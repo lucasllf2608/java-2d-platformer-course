@@ -3,16 +3,13 @@ package Mundo;
 public class Camera {
     public static int x, y;
 
-    public static int clamp(int atual, int min, int max) {
-        if (max < min) {
-            return min;
+    public static int clamp(int inicio, int minimo, int maximo) {
+        if(inicio < minimo) {
+            inicio = minimo;
         }
-        if (atual < min) {
-            atual = min;
+        if(inicio > maximo) {
+            inicio = maximo;
         }
-        if (atual > max) {
-            atual = max;
-        }
-        return atual;
+        return inicio;
     }
 }

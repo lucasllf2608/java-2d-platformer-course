@@ -29,8 +29,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	private boolean isRunning = true;
 
 	
-	public static int WIDTH = 260;
-	public static int HEIGHT = 140;
+	public static int WIDTH = 240;
+	public static int HEIGHT = 160;
 	private static int SCALE = 4;
 
 	private BufferedImage fundo;
@@ -47,17 +47,17 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		
 		// Aula: fundo preto no buffer. Depois descomente para usar a imagem.
 		// try {
-		// 	fundo = ImageIO.read(new File("res/fundo.jpg"));
+		// 	fundo = ImageIO.read(new File("src/res/fundo.jpg"));
 		// } catch (IOException e) {
 		// 	e.printStackTrace();
 		// }
 
     entities = new ArrayList<>();
-	spritesheet = new Spritesheet("/res/spriteSheet-course.png");
+	spritesheet = new Spritesheet("src/res/spriteSheet-course.png");
 	//player = new Player(mundo.playerSpawnX, mundo.playerSpawnY, 16, 16, spritesheet.getSprite(32, 0, 16, 16));
 	player = new Player(0, 0, 16, 16, spritesheet.getSprite(32, 0, 16, 16));
 	entities.add(player);
-	mundo = new Mundo("/res/level1.png");
+	mundo = new Mundo("src/res/level1.png");
 	
 
 	}
